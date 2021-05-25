@@ -14,7 +14,8 @@ void cantidadContenedoresIngresados(int numPuertos, string contenedoresPorPuerto
         
     int totalContenedores;
     for (int i = 0; i < numPuertos; i++) {
-        int n = string(contenedoresPorPuerto[i][1]);
+        int n = 0
+	string(contenedoresPorPuerto[i][1]);
         totalContenedores += n;
 		cout << "Cantidad de contenedores ingresados " << totalContenedores <<"\n";
 	}
