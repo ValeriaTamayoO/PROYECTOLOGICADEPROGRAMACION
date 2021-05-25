@@ -1,0 +1,194 @@
+#include <iostream>
+using namespace std;
+
+
+
+int numeroFilas = 4;
+int numeroColumnas = 5;
+int cantidadCeldasDelBarco = numeroFilas * numeroColumnas;
+    
+   
+    
+//Procedimeientos
+void cantidadContenedoresIngresados(int numPuertos, string contenedoresPorPuerto[][2]) {
+        
+    int totalContenedores;
+    for (int i = 0; i < numPuertos; i++) {
+        int n =0
+		;(contenedoresPorPuerto[i][1]);
+        totalContenedores += n;
+		cout << "Cantidad de contenedores ingresados " << totalContenedores <<"\n";
+	}
+}
+    
+    
+int main() {
+   
+    //Matrices
+    //Matrix disponibilidad. ) es igual a disponible y 1 es igual a acupada
+    int disponibilidad[numeroFilas][numeroColumnas];
+    disponibilidad[0][0] = 0;
+	disponibilidad[0][1] = 0;
+	disponibilidad[0][2] = 0;
+	disponibilidad[0][3] = 0;
+	disponibilidad[0][4] = 0;
+	disponibilidad[1][0] = 0;
+	disponibilidad[1][1] = 0;
+	disponibilidad[1][2] = 0;
+	disponibilidad[1][3] = 0;
+	disponibilidad[1][4] = 0;
+	disponibilidad[2][0] = 0;
+	disponibilidad[2][1] = 0;
+	disponibilidad[2][2] = 0;
+	disponibilidad[2][3] = 0;
+	disponibilidad[2][4] = 0;
+	disponibilidad[3][0] = 0;
+	disponibilidad[3][1] = 0;
+	disponibilidad[3][2] = 0;
+	disponibilidad[3][3] = 0;
+	disponibilidad[3][4] = 0;
+    
+    //Matrix marcas
+    string marcas[numeroFilas][numeroColumnas];
+    
+    //Matrix peso
+    float peso[numeroFilas][numeroColumnas];
+    
+    //Matrix puertoCarga
+    string puertoCarga[numeroFilas][numeroColumnas];
+    
+    //Matrix tipoArticulos
+    string tipoArticulos[numeroFilas][numeroColumnas];
+	
+	string colorCeldas[numeroFilas][numeroColumnas];
+	//Iniciar matriz colorCelda
+	colorCeldas[0][0] = "Azul";
+	colorCeldas[0][1] = "Azul";
+	colorCeldas[0][2] = "Azul";
+	colorCeldas[0][3] = "Azul";
+	colorCeldas[0][4] = "Azul";
+	colorCeldas[1][0] = "Azul";
+	colorCeldas[1][1] = "Amarillo";
+	colorCeldas[1][2] = "Amarillo";
+	colorCeldas[1][3] = "Amarillo";
+	colorCeldas[1][4] = "Azul";
+	colorCeldas[2][0] = "Azul";
+	colorCeldas[2][1] = "Amarillo";
+	colorCeldas[2][2] = "Amarillo";
+	colorCeldas[2][3] = "Amarillo";
+	colorCeldas[2][4] = "Azul";
+	colorCeldas[3][0] = "Azul";
+	colorCeldas[3][1] = "Azul";
+	colorCeldas[3][2] = "Azul";
+	colorCeldas[3][3] = "Azul";
+	colorCeldas[3][4] = "Azul";		
+	
+	//variable para guardar el acumulado de celdas que se van llenando
+	int cantidadCeldasOcupadas = 0;
+
+    //variable para guardar el numero de Puertos
+    int numPuertos;
+    
+    // Se solicita a usario que digite el numero de puertos
+    cout << "Digite el numero de puertos: ";
+    cin >> numPuertos;
+    
+    
+    //Matrix para almacenat el nombre del puerto y la cantidad de contenedores por puerto. Son dos columnas, una para el nombre del puerto y otra para la cantidad de contenedores.
+    string contenedoresPorPuerto[numPuertos][2];
+    
+    //Arreglo puertos. El tamano del arreglo es el valor que el usario acaba de digitar
+    string puertos[numPuertos];
+    
+    // Se solicita a usario digitar el nobre de cada puerto
+    for (int i = 0; i < numPuertos; i++)  {
+		cout << "Ingrese el nombre del puerto " << i+1 << "\n";
+        cin >> puertos[i];
+   }
+   
+   //Ingresar a cada puerto empezando por el primero del array
+   for (int i = 0; i < numPuertos; i++) {
+			
+			double valorRecaudaoEnElPuerto = 0;
+			
+			cout << "El barco ha llegado al Puerto :" << puertos[i] << "\n";
+			
+		
+			cout << "Digite la cantidad de contenedores que va a ingresar" << "\n";
+			int cantidadContenedores;
+			cin >> cantidadContenedores;
+			
+			//Llenar la matrix contenedoresPorPuerto con el nombre del puerto y la cantidad de contenedores.
+			contenedoresPorPuerto[i][0] = puertos[i] ;
+			contenedoresPorPuerto[i][1] 
+			; (cantidadContenedores);
+
+			for (int j = 0; j < cantidadContenedores; j++) {
+			    cout << "Celdas Disponibles :" << "\n";
+			    string celdasDisponibles;
+			    for (int i = 0; i < numeroFilas; i++) {
+			        for (int j = 0; j < numeroColumnas; j++) {
+				        if (disponibilidad[i][j] == 0) {
+					         cout<< "[" << i << "," << j << "]";  
+				       }
+				    }
+				    cout<<"\n"; //new line at each row
+			    }
+			    
+			    cout << "Digite coordenada X (numero de la fila) :" << "\n";
+				int fila;
+				cin >> fila;
+				cout << "Digite coordenada Y (numero de la columna) :" << "\n";
+				int columna;
+                cin >> columna;
+			
+				cout << "Celda Seleccionada: [" << fila << "," << columna << "]" << "\n";
+
+                //Si la celda seleccionada esta fuera de rango o ya se encuentra ocupada, seguir preguntando
+				while (((fila > (numeroFilas-1)) || (columna > (numeroColumnas-1))) || disponibilidad[fila][columna] == 1) {
+				    cout << "Celda no valida. Seleccione otra celda" << "\n";
+				    
+				    // Se sobreescriben las cordenadas para tener almacenados los nuevos valores
+					cout << "Digite coordenada X valida (numero de la fila) :" << "\n";
+					cin >> fila;
+					cout << "Digite coordenada Y valida  (numero de la columna) :" << "\n";
+					cin >> columna;
+				}
+
+				cout << "Marca :" << "\n";
+				cin >> marcas[fila][columna];
+				
+				cout << "Peso :" << "\n";
+			    cin >> peso[fila][columna];
+			    
+				cout << "Puerto Origen :\n";
+			    cin >> puertoCarga[fila][columna];
+			    
+				cout << "Seleccione Tipo de Articulo" << "\n" << "A : Alimentos" << "\n" << "B : Dispositivos Electronicos" << "\n" << "C : Ropa y demas textiles" << "\n";
+			    cin >> tipoArticulos[fila][columna];
+
+				disponibilidad[fila][columna] = 1;
+				cantidadCeldasOcupadas += 1;
+				
+				
+				string colorCelda = colorCeldas[fila][columna];
+				if (colorCelda == "Azul") {
+					valorRecaudaoEnElPuerto += 100;
+				}else if(colorCelda == "Amarillo"){
+					valorRecaudaoEnElPuerto += 300;
+				} 
+
+			}
+
+		    
+			int porcentajeOcupacion = ((cantidadCeldasOcupadas * 100) / cantidadCeldasDelBarco);
+		    cout << "Porcentaje ocupacion actual del barco en el puerto " << puertos[i] << " es: " << porcentajeOcupacion << "\n";
+			cout << "Valor recaudado en el puerto actual es: " << valorRecaudaoEnElPuerto << "\n"; 
+			
+			//Llamar procedimiento
+			cantidadContenedoresIngresados(numPuertos, contenedoresPorPuerto);
+
+		}
+    
+    return 0;
+}
